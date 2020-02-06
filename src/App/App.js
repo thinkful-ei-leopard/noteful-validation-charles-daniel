@@ -9,11 +9,14 @@ import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
 import AddFolder from '../AddFolder';
+import AddNote from '../AddNote';
 
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        foldername: '',
+        selectedId: '',    
     };
 
     componentDidMount() {
@@ -45,9 +48,21 @@ class App extends Component {
 
     handleAddFolder = (newFolder) => {
         this.setState({
-            folders: this.state.folders.push(newFolder)
+            folders: [...this.state.folders, newFolder]
         });
     };
+
+    handleAddNote = (newNote) => {
+        this.setState({
+            notes: [...this.state.notes, newNote]
+        });
+    }
+
+    handleFolderIdSelection = (folderId) => {
+        this.setState({
+            selectedId: folderId,
+        });
+    }
 
     renderNavRoutes() {
         return (
@@ -62,7 +77,7 @@ class App extends Component {
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav} />
                 <Route path="/add-folder" component={AddFolder} />
-                <Route path="/add-note" component={NotePageNav} />
+                <Route path="/add-note" component={AddNote} />
             </>
         );
     }
@@ -88,7 +103,10 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.handleDeleteNote,
-            handleAddFolder: this.handleAddFolder
+            handleAddFolder: this.handleAddFolder,
+            handleAddNote: this.handleAddNote,
+            handleFolderIdSelection: this.handleFolderIdSelection,
+            selectedId: this.state.selectedId
         };
         return (
             <ApiContext.Provider value={value}>

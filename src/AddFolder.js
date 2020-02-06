@@ -15,14 +15,9 @@ class AddFolder extends React.Component {
   }
   static contextType = ApiContext; 
 
-  // onAddFolder = () => {
-  //   this.props.history.goBack('/')
-  // }
-
   handleClickAddFolder = (e) => {
     e.preventDefault();
-    console.log('button working');
-    const folderName = 'form value';
+    const folderName = e.target.folderNameInput.value;
     let newFolder = JSON.stringify({
         name: folderName,
     })
@@ -39,10 +34,10 @@ class AddFolder extends React.Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(() => {
-        this.context.handleAddFolder(folderName)
+      .then((data) => {
+        console.log(data);
+        this.context.handleAddFolder(data)
         // allow parent to perform extra behaviour
-        // this.props.(folderName)
       })
       .catch(error => {
         console.error({ error })
@@ -65,7 +60,7 @@ class AddFolder extends React.Component {
             <form onSubmit={(e) => this.handleClickAddFolder(e)}>
                 <h2>Add Folder</h2>
                 <label htmlFor='folder-name-input'>New Folder Name</label>
-                <input name='folder-name-input' className='folder-name-input'></input>
+                <input name='folder-name-input' id='folderNameInput'></input>
                 <button type='submit' id='submit'
                 onClick={() => this.props.history.goBack()} >Create</button>
             </form>
