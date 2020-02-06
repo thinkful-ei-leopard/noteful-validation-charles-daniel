@@ -21,13 +21,17 @@ class AddNote extends React.Component {
         const noteName = e.target.noteName.value;
         const noteText = e.target.noteText.value;
         const noteFolderId = this.context.selectedId;
-        
         let newNote = JSON.stringify({
-            name: noteName,
-            content: noteText,
-            folderId: noteFolderId
+          name: noteName,
+          content: noteText,
+          folderId: noteFolderId
         })
-        console.log(newNote);
+        // validateNoteName = (name) => {
+        //   let name = e.target.noteName.value;
+        //   if (name === '') {
+        //       return 'Must enter name';
+        //   }
+        //   else{
         fetch(`${config.API_ENDPOINT}/notes/`, {
             method: 'POST',
             headers: {
@@ -41,14 +45,15 @@ class AddNote extends React.Component {
               return res.json()
             })
             .then((data) => {
-              console.log(data);
               this.context.handleAddNote(data)
               // allow parent to perform extra behaviour
             })
             .catch(error => {
               console.error({ error })
             })
-        };
+    };  
+             
+        
         
 
     render() {
@@ -67,6 +72,7 @@ class AddNote extends React.Component {
               <form onSubmit={(e) => this.handleAddNoteClick(e)}>
                   <h2>Add Note</h2>
                   <label htmlFor='note-name'>Name</label>
+                  {/* <p className="error">{this.validateNoteName()}</p> */}
                   <input name='note-name' id='noteName' required></input>
                   <textarea rows="4" cols="50" name='note-text' id='noteText'></textarea>
                   <select defaultValue= {this.context.selectedId}
@@ -78,11 +84,12 @@ class AddNote extends React.Component {
                           { this.context.folders.map((folder) => <FolderOption folder={folder}/> )}
                   </select>
                   <button type='submit' id='add-note-submit'
-                  onClick={() => this.props.history.goBack()}>Submit</button>
+                  onSubmit={() => this.props.history.goBack()}>Submit</button>
               </form>
           </div>  
         )
     }
+  
 }
 
 export default AddNote;
