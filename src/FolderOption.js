@@ -1,5 +1,4 @@
 import React from 'react'
-import ApiContext from './ApiContext';
 
 function FolderOption(props) {
 

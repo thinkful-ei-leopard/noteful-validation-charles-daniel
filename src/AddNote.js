@@ -69,7 +69,10 @@ class AddNote extends React.Component {
               <br />
               Back
             </CircleButton>
-              <form onSubmit={(e) => this.handleAddNoteClick(e)}>
+              <form onSubmit={(e) => {
+                this.handleAddNoteClick(e);
+                this.props.history.goBack()
+                }}>
                   <h2>Add Note</h2>
                   <label htmlFor='note-name'>Name</label>
                   {/* <p className="error">{this.validateNoteName()}</p> */}
@@ -81,7 +84,7 @@ class AddNote extends React.Component {
                         this.context.handleFolderIdSelection(e.target.value)}
                     }
                   >
-                          { this.context.folders.map((folder) => <FolderOption folder={folder}/> )}
+                          { this.context.folders.map((folder) => <FolderOption key={folder.id} folder={folder}/> )}
                   </select>
                   <button type='submit' id='add-note-submit'
                   onSubmit={() => this.props.history.goBack()}>Submit</button>

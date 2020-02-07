@@ -7,6 +7,7 @@ import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
 import PropTypes from 'prop-types'
+import ErrorBoundary from '../ErrorBoundary'
 
 export default class NoteListMain extends React.Component {
   static defaultProps = {
@@ -25,11 +26,13 @@ export default class NoteListMain extends React.Component {
         <ul>
           {notesForFolder.map(note =>
             <li key={note.id}>
+              <ErrorBoundary>
               <Note
                 id={note.id}
                 name={note.name}
                 modified={note.modified}
               />
+              </ErrorBoundary>
             </li>
           )}
         </ul>
