@@ -21,10 +21,19 @@ class AddNote extends React.Component {
         const noteName = e.target.noteName.value;
         const noteText = e.target.noteText.value;
         const noteFolderId = this.context.selectedId;
+        let day = new Date().getDate();
+        const month = new Date().getMonth() +1;
+        const year = new Date().getFullYear();
+        const hours = new Date().getHours();
+        const min = new Date().getMinutes();
+        const sec = new Date().getSeconds();
+        let noteDateModified = `${year}-${month}-${day}T${hours}:${min}:${sec}`;
+        noteDateModified = noteDateModified.replace(/\b(\d{1})\b/g, '0$1');
         let newNote = JSON.stringify({
           name: noteName,
           content: noteText,
-          folderId: noteFolderId
+          folderId: noteFolderId,
+          modified: noteDateModified
         })
         // validateNoteName = (name) => {
         //   let name = e.target.noteName.value;
@@ -75,7 +84,6 @@ class AddNote extends React.Component {
                 }}>
                   <h2>Add Note</h2>
                   <label htmlFor='note-name'>Name</label>
-                  {/* <p className="error">{this.validateNoteName()}</p> */}
                   <input name='note-name' id='noteName' required></input>
                   <textarea rows="4" cols="50" name='note-text' id='noteText'></textarea>
                   <select defaultValue= {this.context.selectedId}

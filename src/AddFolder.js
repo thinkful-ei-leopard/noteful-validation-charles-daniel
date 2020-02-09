@@ -56,12 +56,15 @@ class AddFolder extends React.Component {
           <br />
           Back
         </CircleButton>
-            <form onSubmit={(e) => this.handleClickAddFolder(e)}>
+            <form onSubmit={(e) => {
+              this.handleClickAddFolder(e);
+              this.props.history.goBack()
+            }
+          }>
                 <h2>Add Folder</h2>
                 <label htmlFor='folder-name-input'>New Folder Name</label>
-                <input name='folder-name-input' id='folderNameInput'></input>
-                <button type='submit' id='submit'
-                onClick={() => this.props.history.goBack()} >Create</button>
+                <input name='folder-name-input' id='folderNameInput' required></input>
+                <button type='submit' id='submit'>Create</button>
             </form>
         </div>    
         )
