@@ -20,15 +20,16 @@ class AddNote extends React.Component {
         e.preventDefault();
         const noteName = e.target.noteName.value;
         const noteText = e.target.noteText.value;
-        const noteFolderId = this.context.selectedId;
+        const notefolderid = this.context.selectedId;
         let newNote = JSON.stringify({
           name: noteName,
           content: noteText,
-          folderId: noteFolderId,
-          modified: new Date()
+          folderid: notefolderid
         })
+
+        console.log(newNote)
         
-        fetch(`${config.API_ENDPOINT}/notes/`, {
+        fetch(`${config.API_ENDPOINT}/notes`, {
             method: 'POST',
             headers: {
               'content-type': 'application/json'
@@ -76,7 +77,7 @@ class AddNote extends React.Component {
                   <select defaultValue= {this.context.selectedId}
                     onChange={(e) => {
                         e.preventDefault();
-                        this.context.handleFolderIdSelection(e.target.value)}
+                        this.context.handlefolderidSelection(e.target.value)}
                     }
                   >
                           { this.context.folders.map((folder) => <FolderOption key={folder.id} folder={folder}/> )}

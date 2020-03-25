@@ -16,7 +16,7 @@ class App extends Component {
         notes: [],
         folders: [],
         foldername: '',
-        selectedId: 'b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1',    
+        selectedId: '1',    
     };
 
     componentDidMount() {
@@ -58,16 +58,16 @@ class App extends Component {
         });
     }
 
-    handleFolderIdSelection = (folderId) => {
+    handlefolderidSelection = (folderid) => {
         this.setState({
-            selectedId: folderId,
+            selectedId: folderid,
         });
     }
 
     renderNavRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
+                {['/', '/folder/:folderid'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -85,7 +85,7 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
+                {['/', '/folder/:folderid'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -105,7 +105,7 @@ class App extends Component {
             deleteNote: this.handleDeleteNote,
             handleAddFolder: this.handleAddFolder,
             handleAddNote: this.handleAddNote,
-            handleFolderIdSelection: this.handleFolderIdSelection,
+            handlefolderidSelection: this.handlefolderidSelection,
             selectedId: this.state.selectedId
         };
         return (
