@@ -26,8 +26,6 @@ class AddNote extends React.Component {
           content: noteText,
           folderid: notefolderid
         })
-
-        console.log(newNote)
         
         fetch(`${config.API_ENDPOINT}/notes`, {
             method: 'POST',

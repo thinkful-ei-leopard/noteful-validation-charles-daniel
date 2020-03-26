@@ -30,7 +30,7 @@ export default class NoteListMain extends React.Component {
               <Note
                 id={note.id}
                 name={note.name}
-                modified={note.modified}
+                date_modified={note.date_modified}
               />
               </ErrorBoundary>
             </li>
